@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image" href="./resources/TaskMGT.png"/>
+    <link rel="stylesheet" href="main.css" />
+    <title>TaskMGT To-Do App</title>
+  </head>
+  <img src="resources/TaskMGT.png" alt="App logo">
+
+  <body>
+    <main class="app">
+      <section class="greeting">
+        <h2 class="title">
+          Hi! <input type="text" id="name" placeholder="Your name here" />
+        </h2> 
+      </section>
+
+      <section class="create-to-do">
+        <h3>CREATE A LIST</h3>
+
+        <form id="new-todo-form">
+          <h4>What would you like to add?</h4>
+          <input
+            type="text"
+            name="content"
+            id="content"
+            placeholder="e.g. Buy groceries" required
+          />
+
+          <h4>Choose a category</h4>
+          <div class="options">
+            <label>
+              <input type="radio" name="category" id="category1" value="work"/>
+              <span class="bubble work"></span>
+              <div>Work</div>
+            </label>
+
+            <label>
+              <input type="radio" name="category" id="category2" value="personal"/>
+              <span class="bubble personal"></span>
+              <div>Personal</div>
+            </label>
+          </div>
+
+          <input type="submit" value="Add To-Do" />
+        </form>
+      </section>
+<!--To DO List Section-->
+      <section class="todo-list">
+        <h3>TO DO LIST</h3>
+        <div class="list" id="todo-list">
+          <!-- <div class="todo-item done">
+            <label>
+              <input type="checkbox" />
+              <span class="bubble work"></span>
+            </label>
+
+            <div class="todo-content">
+              <input type="text" value="work on new project" readonly />
+            </div>
+
+            <div class="actions">
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </div>
+          </div>
+          <div class="todo-item">
+            <label>
+              <input type="checkbox" />
+              <span class="bubble personal"></span>
+            </label>
+
+            <div class="todo-content">
+              <input type="text" value="make dinner" readonly />
+            </div>
+
+            <div class="actions">
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </div>
+          </div> -->
+        </div>
+    </div>
+      </section>
+    </main>
+    <footer>&#169;2023 TaskMGT by: Nnaemeka C. Emesowum</footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
