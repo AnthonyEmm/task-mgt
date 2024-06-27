@@ -1,9 +1,11 @@
-// Retrieve and store data in the local storage
+// Ensure todos is globally scoped
+let todos = [];
 
+// Retrieve and store data in the local storage
 window.addEventListener("load", () => {
-  todos = JSON.parse(localStorage.getItem("todos")) || []; //todos is the Global variable
+  todos = JSON.parse(localStorage.getItem("todos")) || [];
   const nameInput = document.querySelector("#name");
-  const todoList = document.querySelector("todo-list");
+  const todoList = document.querySelector("#todo-list");
   const newTodoForm = document.querySelector("#new-todo-form");
 
   const username = localStorage.getItem("username") || "";
@@ -24,17 +26,16 @@ window.addEventListener("load", () => {
       createdAt: new Date().toLocaleTimeString(),
     };
 
-    // Pushes data and to the local storage and also reset to default
     todos.push(todo);
 
     localStorage.setItem("todos", JSON.stringify(todos));
 
     e.target.reset();
 
-    DisplayTodos();
+    DisplayTodos(); // Call DisplayTodos after adding a new todo
   });
 
-  DisplayTodos();
+  DisplayTodos(); // Initial display of todos on page load
 });
 
 const DisplayTodos = () => {
@@ -42,7 +43,9 @@ const DisplayTodos = () => {
 
   todoList.innerHTML = "";
 
-  // Add todo items in the input section
+  // Reverse todos array to display latest todos first
+  todos.reverse();
+
   todos.forEach((todo) => {
     const todoItem = document.createElement("div");
     todoItem.classList.add("todo-item");
@@ -59,7 +62,7 @@ const DisplayTodos = () => {
     input.checked = todo.done;
     span.classList.add("bubble");
 
-    if (todo.category == "personal") {
+    if (todo.category === "personal") {
       span.classList.add("personal");
     } else {
       span.classList.add("work");
@@ -70,8 +73,7 @@ const DisplayTodos = () => {
     edit.classList.add("edit");
     deleteButton.classList.add("delete");
 
-    content.innerHTML = `<input type="text" value="${todo.content}" 
-        readonly>`;
+    content.innerHTML = `<input type="text" value="${todo.content}" readonly>`;
     edit.innerHTML = "Edit";
     deleteButton.innerHTML = "Delete";
 
@@ -102,7 +104,6 @@ const DisplayTodos = () => {
       DisplayTodos();
     });
 
-    //Eventlistener for the edit and delete buttons on click
     edit.addEventListener("click", (e) => {
       const input = content.querySelector("input");
       input.removeAttribute("readonly");
@@ -116,9 +117,12 @@ const DisplayTodos = () => {
     });
 
     deleteButton.addEventListener("click", (e) => {
-      todos = todos.filter((t) => t != todo);
+      todos = todos.filter((t) => t !== todo);
       localStorage.setItem("todos", JSON.stringify(todos));
       DisplayTodos();
     });
   });
+
+  // Restore the original order of todos array after rendering
+  todos.reverse();
 };
